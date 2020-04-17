@@ -1,5 +1,17 @@
-import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import {
+    BaseEntity,
+    BeforeInsert,
+    BeforeUpdate,
+    Column,
+    CreateDateColumn,
+    Entity,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn
+} from "typeorm";
 import {IsEmail} from "class-validator";
+import bcrypt from "bcrypt";
+
+const BCRYPT_ROUNDS = 10;
 
 @Entity()
 class User extends BaseEntity{
@@ -33,10 +45,6 @@ class User extends BaseEntity{
     @Column({ type: "text" })
     profilePhoto: string;
 
-    get fullName(): String {
-        return `${this.firstName} ${this.lastName}`
-    }
-
     @Column({ type: "boolean", default: false })
     isDriving: boolean;
     @Column({ type: "boolean", default: false })
@@ -53,6 +61,26 @@ class User extends BaseEntity{
 
     @CreateDateColumn() createdAt: string;
     @UpdateDateColumn() updatedAt: string;
+
+    get fullName(): String {
+        return `${this.firstName} ${this.lastName}`
+    }
+
+    private static hashPassword(password: string): Promise<string> {
+        return bcrypt.hash(password, BCRYPT_ROUNDS);
+    }
+
+    public comparePassword(password: string): Promise<boolean> {
+        return bcrypt.compare(password, this.password)
+    }
+
+    @BeforeInsert()
+    @BeforeUpdate()
+    async savePassword() : Promise<void> {
+        if (this.password) {
+            this.password = await User.hashPassword(this.password);
+        }
+    }
 }
 
 export default User;
