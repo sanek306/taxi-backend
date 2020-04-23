@@ -5,11 +5,16 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    ManyToOne, OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
 import {IsEmail} from "class-validator";
 import bcrypt from "bcrypt";
+import Chat from "./Chat";
+import Message from "./Message";
+import Verification from "./Verification";
+import Ride from "./Ride";
 
 const BCRYPT_ROUNDS = 10;
 
@@ -58,6 +63,21 @@ class User extends BaseEntity{
     lastLat: number;
     @Column({ type: "double precision", default: 0})
     lastOrientation: number;
+
+    @ManyToOne(_type => Chat, chat => chat.participants)
+    chat: Chat;
+
+    @OneToMany(_type => Message, message => message.user)
+    messages: Message[];
+
+    @OneToMany(_type => Verification, verification => verification.user)
+    verifications: Verification[];
+
+    @OneToMany(_type => Ride, ride => ride.passenger)
+    ridesAsPassenger: Ride[];
+
+    @OneToMany(_type => Ride, ride => ride.driver)
+    ridesAsDriver: Ride[];
 
     @CreateDateColumn() createdAt: string;
     @UpdateDateColumn() updatedAt: string;

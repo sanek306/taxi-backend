@@ -4,10 +4,11 @@ type Verification {
     payload: String!
     key: String!
     used: Boolean!
+    user: User!
     createdAt: String!
-    updatedAt: String!
+    updatedAt: String
 }
 
 type Query {
-    user: User
+    verification: Verification
 }
