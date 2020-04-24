@@ -7,7 +7,7 @@ Created by materials of Nomad Academy.
 ### Public Resolvers: 
 
 - [x] Sign In/Sign Up with Facebook
-- [ ] Sign In with Email
+- [x] Sign In with Email
 - [ ] Starts Phone Number Verification
 - [ ] Complete Phone Number Verification
 - [ ] Sign Up with Email
