@@ -8,8 +8,8 @@ Created by materials of Nomad Academy.
 
 - [x] Sign In/Sign Up with Facebook
 - [x] Sign In with Email
-- [ ] Starts Phone Number Verification
-- [ ] Complete Phone Number Verification
+- [x] Starts Phone Number Verification
+- [x] Complete Phone Number Verification
 - [ ] Sign Up with Email
 
 ### Private Resolvers

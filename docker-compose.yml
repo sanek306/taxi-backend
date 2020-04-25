@@ -3,6 +3,7 @@ services:
     postgres:
       restart: always
       image: postgres:latest
+
       ports:
         - "5432:${DB_PORT}"
       volumes:

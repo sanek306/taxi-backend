@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "predev": "yarn run types",
-    "dev": "cd src && nodemon --exec ts-node index.ts ts,graphql",
+    "copy-env": "@powershell copy .env src/.env",
     "pretypes": "gql-merge --out-file ./src/schema.graphql ./src/api/**/*.graphql",
-    "types": "graphql-to-typescript ./src/schema.graphql ./src/types/graph.d.ts"
+    "types": "graphql-to-typescript ./src/schema.graphql ./src/types/graph.d.ts",
+    "predev": "yarn run copy-env && yarn run types",
+    "dev": "cd src && nodemon --exec ts-node index.ts ts,graphql"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
     "@types/helmet": "^0.0.45",
     "@types/morgan": "^1.9.0",
     "@types/node": "^13.11.1",
+    "@types/twilio": "^2.11.0",
     "babel-runtime": "^6.26.0",
     "gql-merge": "^0.0.6",
     "graphql-to-typescript": "^0.1.2",
@@ -44,6 +46,7 @@
     "merge-graphql-schemas": "^1.7.8",
     "morgan": "^1.10.0",
     "pg": "^8.0.2",
+    "twilio": "^3.42.2",
     "typeorm": "^0.2.24"
   }
 }

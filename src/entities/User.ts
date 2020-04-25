@@ -13,7 +13,6 @@ import {IsEmail} from "class-validator";
 import bcrypt from "bcrypt";
 import Chat from "./Chat";
 import Message from "./Message";
-import Verification from "./Verification";
 import Ride from "./Ride";
 
 const BCRYPT_ROUNDS = 10;
@@ -72,9 +71,6 @@ class User extends BaseEntity{
 
     @OneToMany(_type => Message, message => message.user)
     messages: Message[];
-
-    @OneToMany(_type => Verification, verification => verification.user)
-    verifications: Verification[];
 
     @OneToMany(_type => Ride, ride => ride.passenger)
     ridesAsPassenger: Ride[];

@@ -2,8 +2,7 @@ import app from './app';
 import { createConnection} from "typeorm";
 import {Options} from "graphql-yoga";
 import dotenv from "dotenv";
-import path from "path";
-dotenv.config({ path: path.join(__dirname, "/./../.env") });
+dotenv.config();
 import defaultConnectionOptions from "./ormConfig";
 
 const PORT : number = (process.env.PORT || 4000) as number;
