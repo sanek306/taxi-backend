@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "copy-env": "@powershell copy .env src/.env",
     "pretypes": "gql-merge --out-file ./src/schema.graphql ./src/api/**/*.graphql",
     "types": "graphql-to-typescript ./src/schema.graphql ./src/types/graph.d.ts",
+    "copy-env": "@powershell copy .env src/.env",
     "predev": "yarn run copy-env && yarn run types",
-    "dev": "cd src && nodemon --exec ts-node index.ts ts,graphql"
+    "dev": "cd src && nodemon --exec ts-node index.ts ts,graphql",
+    "copy-env-mac": "cp -R .env src/.env",
+    "predev-mac": "yarn run copy-env-mac && yarn run types",
+    "dev-mac": "cd src && nodemon --exec ts-node index.ts ts,graphql"
   },
   "repository": {
     "type": "git",
@@ -27,6 +30,7 @@
     "@types/morgan": "^1.9.0",
     "@types/node": "^13.11.1",
     "@types/twilio": "^2.11.0",
+    "@types/jsonwebtoken": "^8.3.9",
     "babel-runtime": "^6.26.0",
     "gql-merge": "^0.0.6",
     "graphql-to-typescript": "^0.1.2",
@@ -43,6 +47,7 @@
     "graphql-tools": "^5.0.0",
     "graphql-yoga": "^1.18.3",
     "helmet": "^3.22.0",
+    "jsonwebtoken": "^8.5.1",
     "merge-graphql-schemas": "^1.7.8",
     "morgan": "^1.10.0",
     "pg": "^8.0.2",

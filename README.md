@@ -12,10 +12,13 @@ Created by materials of Nomad Academy.
 - [x] Complete Phone Number Verification
 - [ ] Sign Up with Email
 
-### Private Resolvers
+### Authentication: 
 
 - [ ] Generate JWT
 - [ ] Verify JWT
+
+### Private Resolvers
+
 - [ ] Verify Email
 - [ ] Get My Profile
 - [ ] Update my Profile
