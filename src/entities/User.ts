@@ -66,22 +66,22 @@ class User extends BaseEntity{
     @Column({ type: "double precision", default: 0})
     lastOrientation: number;
 
-    @ManyToOne(_type => Chat, chat => chat.participants)
+    @ManyToOne(() => Chat, chat => chat.participants)
     chat: Chat;
 
-    @OneToMany(_type => Message, message => message.user)
+    @OneToMany(() => Message, message => message.user)
     messages: Message[];
 
-    @OneToMany(_type => Ride, ride => ride.passenger)
+    @OneToMany(() => Ride, ride => ride.passenger)
     ridesAsPassenger: Ride[];
 
-    @OneToMany(_type => Ride, ride => ride.driver)
+    @OneToMany(() => Ride, ride => ride.driver)
     ridesAsDriver: Ride[];
 
     @CreateDateColumn() createdAt: string;
     @UpdateDateColumn() updatedAt: string;
 
-    get fullName(): String {
+    get fullName(): string {
         return `${this.firstName} ${this.lastName}`
     }
 

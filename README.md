@@ -10,17 +10,18 @@ Created by materials of Nomad Academy.
 - [x] Sign In with Email
 - [x] Starts Phone Number Verification
 - [x] Complete Phone Number Verification
-- [ ] Sign Up with Email
+- [x] Sign Up with Email
 
 ### Authentication: 
 
-- [ ] Generate JWT
-- [ ] Verify JWT
+- [x] Generate JWT
+- [x] Verify JWT
 
 ### Private Resolvers
 
-- [ ] Verify Email
-- [ ] Get My Profile
+- [x] Get My Profile
+- [x] Request Email Verification
+- [x] Complete Email Verification
 - [ ] Update my Profile
 - [ ] Toggle Driving Mode
 - [ ] Report Location / Orientation
