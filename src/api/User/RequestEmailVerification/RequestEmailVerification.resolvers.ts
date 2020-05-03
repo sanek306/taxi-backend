@@ -11,7 +11,7 @@ const resolvers: Resolvers = {
     Mutation: {
         RequestEmailVerification: authResolver(async (_, __, { req }) : Promise<RequestEmailVerificationResponse> => {
             const user: User = req.user;
-            if (user.email) {
+            if (user.email && !user.verifiedEmail) {
                 try {
                     const oldVerification = await Verification.findOne({payload: user.email});
                     if (oldVerification) {
@@ -38,7 +38,7 @@ const resolvers: Resolvers = {
             else {
                 return {
                     ok: false,
-                    error: "Your user hasn't email to verifys"
+                    error: "Your user hasn't email to verify"
                 }
             }
         })
