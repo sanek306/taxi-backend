@@ -1,6 +1,6 @@
 import { Resolvers } from "types/resolvers";
 import {
-    EditPlaceMutationArgs, EditPlaceResponse
+    DeletePlaceMutationArgs, DeletePlaceResponse
 } from "../../../types/graph";
 import User from "../../../entities/User";
 import authResolver from "../../../utils/authResolver";
@@ -8,14 +8,14 @@ import Place from "../../../entities/Place";
 
 const resolvers: Resolvers = {
     Mutation: {
-        EditPlace: authResolver (async(_, args: EditPlaceMutationArgs, { req }): Promise<EditPlaceResponse> => {
+        DeletePlace: authResolver (async(_, args: DeletePlaceMutationArgs, { req }): Promise<DeletePlaceResponse> => {
             const user : User = req.user;
             const { placeId } = args;
             try {
                 const place = await Place.findOne({ id: placeId });
                 if (place) {
                     if (place.userId === user.id) {
-                        await Place.update( { id: args.placeId },{ ...args });
+                        await place.remove();
                         return {
                             ok: true,
                             error: null
