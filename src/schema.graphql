@@ -9,6 +9,7 @@ type Chat {
 type Query {
   chat: Chat
   message: Message
+  GetMyPlaces: GetMyPlacesResponse!
   place: Place
   ride: Ride
   GetMyProfile: GetMyProfileResponse!
@@ -53,6 +54,12 @@ type DeletePlaceResponse {
 type EditPlaceResponse {
   ok: Boolean!
   error: String
+}
+
+type GetMyPlacesResponse {
+  ok: Boolean!
+  error: String
+  places: [Place]
 }
 
 type Place {
