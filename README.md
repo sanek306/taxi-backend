@@ -29,7 +29,7 @@ Created by materials of Nomad Academy.
 - [x] Edit Place
 - [x] Delete Place
 - [x] Get Place
-- [ ] See Nearby Drivers
+- [x] See Nearby Drivers
 - [ ] Subscribe to Nearby Drivers
 - [ ] Request a Ride
 - [ ] Get Nearby Rides

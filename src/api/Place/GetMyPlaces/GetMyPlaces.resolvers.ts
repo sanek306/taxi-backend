@@ -1,11 +1,11 @@
 import { Resolvers } from "types/resolvers";
 import User from "../../../entities/User";
 import authResolver from "../../../utils/authResolver";
-import Place from "../../../entities/Place";
+import {GetMyPlacesResponse} from "../../../types/graph";
 
 const resolvers: Resolvers = {
-    Mutation: {
-        AddPlace: authResolver (async(_, __, { req }): Promise<{ places: Place[]; ok: boolean; error: string | null }> => {
+    Query: {
+        GetMyPlaces: authResolver (async(_, __, { req }): Promise<GetMyPlacesResponse> => {
             try {
                 const user : User = await User.findOne({ id: req.user.id}, { relations: ["places"]});
                 if (user) {

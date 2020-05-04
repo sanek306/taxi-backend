@@ -26,6 +26,9 @@ class User extends BaseEntity{
     @IsEmail()
     email: string | null;
 
+    @Column({ type: "text", nullable: true })
+    facebookID: string | null;
+
     @Column({ type: "boolean", default: false })
     verifiedEmail: boolean;
 
