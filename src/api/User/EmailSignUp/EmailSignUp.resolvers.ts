@@ -11,10 +11,11 @@ const resolvers: Resolvers = {
             const { email } = args;
             try {
                 const existingUser = await User.findOne({ email });
+                console.log(existingUser);
                 if (existingUser) {
                     return {
                         ok: false,
-                        error: "You should log in instead",
+                        error: "You should LogIn instead",
                         token: null
                     }
                 }
