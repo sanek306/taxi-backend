@@ -1,33 +1,43 @@
 import { Resolvers } from "types/resolvers";
 import authResolver from "../../../utils/authResolver";
 import User from "../../../entities/User";
-import {GetNearbyRidesResponse} from "../../../types/graph";
+import { GetNearbyRideResponse } from "../../../types/graph";
 import {Between} from "typeorm";
 import Ride from "../../../entities/Ride";
 
 const resolvers: Resolvers = {
     Query: {
-        GetNearbyRides: authResolver(async (_, __, { req }) : Promise<GetNearbyRidesResponse> => {
+        GetNearbyRides: authResolver(async (_, __, { req, pubSub }) : Promise<GetNearbyRideResponse> => {
             const user: User = req.user;
             const { lastLat, lastLng } = user;
             if (user.isDriving) {
                 try {
-                    const rides = await Ride.find({
+                    const ride = await Ride.findOne({
                         status: "REQUESTING",
                         pickUpLat: Between(lastLat - 0.05, lastLat + 0.05),
                         pickUpLnd: Between(lastLng - 0.05, lastLng + 0.05)
                     });
-                    return {
-                        ok: true,
-                        error: null,
-                        rides
+                    pubSub.publish("rideRequest", { NearbyRideSubscription: ride });
+                    if (ride) {
+                        return {
+                            ok: true,
+                            error: null,
+                            ride
+                        }
+                    }
+                    else {
+                        return {
+                            ok: true,
+                            error: null,
+                            ride: null
+                        }
                     }
                 }
                 catch (e) {
                     return {
                         ok: true,
                         error: e.message,
-                        rides: null
+                        ride: null
                     }
                 }
             }
@@ -35,7 +45,7 @@ const resolvers: Resolvers = {
                 return {
                     ok: false,
                     error: "You're not a driver",
-                    rides: null
+                    ride: null
                 }
             }
         })
