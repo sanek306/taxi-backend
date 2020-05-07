@@ -5,7 +5,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    ManyToOne, OneToMany,
+    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
@@ -70,8 +70,11 @@ class User extends BaseEntity{
     @Column({ type: "double precision", default: 0})
     lastOrientation: number;
 
-    @ManyToOne(() => Chat, chat => chat.participants)
-    chat: Chat;
+    @OneToMany(() => Chat, chat => chat.passenger)
+    chatsAsPassenger: Chat[];
+
+    @OneToMany(() => Chat, chat => chat.driver)
+    chatsAsDriver: Chat[];
 
     @OneToMany(() => Message, message => message.user)
     messages: Message[];

@@ -7,7 +7,7 @@ import Ride from "../../../entities/Ride";
 
 const resolvers: Resolvers = {
     Query: {
-        GetNearbyRides: authResolver(async (_, __, { req, pubSub }) : Promise<GetNearbyRideResponse> => {
+        GetNearbyRide: authResolver(async (_, __, { req, pubSub }) : Promise<GetNearbyRideResponse> => {
             const user: User = req.user;
             const { lastLat, lastLng } = user;
             if (user.isDriving) {
