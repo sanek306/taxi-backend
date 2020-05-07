@@ -1,7 +1,5 @@
-import { Resolvers } from "types/resolvers";
-import {
-    UpdateRideStatusMutationArgs, UpdateRideStatusResponse
-} from "../../../types/graph";
+import {Resolvers} from "types/resolvers";
+import {UpdateRideStatusMutationArgs, UpdateRideStatusResponse} from "../../../types/graph";
 import authResolver from "../../../utils/authResolver";
 import User from "../../../entities/User";
 import Ride from "../../../entities/Ride";
@@ -20,11 +18,12 @@ const resolvers: Resolvers = {
                         if (ride) {
                             ride.driver = user;
                             user.isTaken = true;
-                            await ride.save();
-                            await Chat.create({
+                            await user.save();
+                            ride.chat = await Chat.create({
                                 driver: user,
                                 passenger: ride.passenger
-                            }).save()
+                            }).save();
+                            await ride.save();
                         }
                     } else {
                         ride = await Ride.findOne({id: rideId, driver: user});

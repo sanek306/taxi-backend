@@ -1,46 +1,48 @@
 import { Resolvers } from "types/resolvers";
+import {
+    SendChatMessageMutationArgs, SendChatMessageResponse
+} from "../../../types/graph";
 import authResolver from "../../../utils/authResolver";
 import User from "../../../entities/User";
-import {GetChatQueryArgs, GetChatResponse} from "../../../types/graph";
+import Message from "../../../entities/Message";
 import Chat from "../../../entities/Chat";
 
 const resolvers: Resolvers = {
-    Query: {
-        GetChat: authResolver(async (_, args: GetChatQueryArgs, { req }) : Promise<GetChatResponse> => {
+    Mutation: {
+        SendChatMessage: authResolver(async (_, args: SendChatMessageMutationArgs, { req, pubSub }) : Promise<SendChatMessageResponse> => {
             const user: User = req.user;
-            const { chatId } = args;
+            const { chatId, text } = args;
             try {
-                const chat = await Chat.findOne({
-                    id: chatId
-                }, { relations: ["passenger", "driver", "messages"]});
+                const chat = await Chat.findOne({ id: chatId });
                 if (chat) {
                     if(chat.passengerId === user.id || chat.driverId === user.id) {
+                        const message = await Message.create({ text, chat, user }).save();
+                        pubSub.publish("newChatMessage", { MessageSubscription: message });
+
                         return {
                             ok: true,
                             error: null,
-                            chat
+                            message
                         }
-                    }
-                    else {
+                    } else {
                         return {
                             ok: false,
-                            error: "Not authorized to see this chat",
-                            chat: null
+                            error: "You're not participate to this chat",
+                            message: null
                         }
                     }
                 } else {
                     return {
                         ok: false,
                         error: "Chat not found",
-                        chat: null
+                        message: null
                     }
                 }
-            }
-            catch (e) {
+            } catch (e) {
                 return {
-                    ok: true,
+                    ok: false,
                     error: e.message,
-                    chat: null
+                    message: null
                 }
             }
         })

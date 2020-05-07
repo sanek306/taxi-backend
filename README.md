@@ -38,9 +38,9 @@ Created by materials of Nomad Academy.
 - [x] Get Ride
 - [x] Subscribe to Ride Status
 - [x] Create Chat Room
-- [ ] Get Chat Room Messages
-- [ ] Subscribe to Chat Room Messages
-- [ ] Send a Chat Message
+- [x] Get Chat Room Messages
+- [x] Subscribe to Chat Room Messages
+- [x] Send a Chat Message
 
 ## Code Challenge
 

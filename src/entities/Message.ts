@@ -15,6 +15,9 @@ class Message extends BaseEntity {
     @Column({ type: "text" })
     text: string;
 
+    @Column()
+    chatId: number;
+
     @ManyToOne(() => Chat, chat => chat.messages)
     chat: Chat;
 
