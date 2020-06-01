@@ -35,11 +35,11 @@ const resolvers: Resolvers = {
                     }
                 }
                 else {
-                 return {
-                     ok: true,
-                     error: null,
-                     token: null
-                 }
+                     return {
+                         ok: true,
+                         error: null,
+                         token: null
+                     }
                 }
             } catch (e) {
                 return {

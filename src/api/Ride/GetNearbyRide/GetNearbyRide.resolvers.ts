@@ -16,7 +16,7 @@ const resolvers: Resolvers = {
                         status: "REQUESTING",
                         pickUpLat: Between(lastLat - 0.05, lastLat + 0.05),
                         pickUpLnd: Between(lastLng - 0.05, lastLng + 0.05)
-                    });
+                    }, { relations: ["passenger"]});
                     pubSub.publish("rideRequest", { NearbyRideSubscription: ride });
                     if (ride) {
                         return {

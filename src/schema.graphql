@@ -19,6 +19,13 @@ type Query {
   verification: Verification
 }
 
+type Subscription {
+  MessageSubscription: Message
+  NearbyRideSubscription: Ride
+  RideStatusSubscription: Ride
+  DriversSubscription: User
+}
+
 type SendChatMessageResponse {
   ok: Boolean!
   error: String
@@ -40,6 +47,7 @@ type Mutation {
   ReportMovement(lastLng: Float, lastLat: Float, lastOrientation: Float): ReportMovementResponse!
   RequestEmailVerification: RequestEmailVerificationResponse!
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
+  ToggleDrivingMode: ToggleDrivingModeResponse!
   UpdateMyProfile(firstName: String, lastName: String, email: String, password: String, profilePhoto: String, age: Int): UpdateMyProfileResponse!
 }
 
@@ -61,6 +69,7 @@ type Message {
   text: String!
   chat: Chat!
   user: User!
+  chatId: Int!
   createdAt: String!
   updatedAt: String
 }
@@ -110,12 +119,6 @@ type GetRideResponse {
   ride: Ride
 }
 
-type Subscription {
-  NearbyRideSubscription: Ride
-  RideStatusSubscription: Ride
-  DriversSubscription: User
-}
-
 type RequestRideResponse {
   ok: Boolean!
   error: String
@@ -147,6 +150,7 @@ type Ride {
 type UpdateRideStatusResponse {
   ok: Boolean!
   error: String
+  rideId: Int!
 }
 
 enum StatusOptions {
@@ -242,6 +246,11 @@ type StartPhoneVerificationResponse {
   ok: Boolean!
   error: String
   token: String
+}
+
+type ToggleDrivingModeResponse {
+  ok: Boolean!
+  error: String
 }
 
 type UpdateMyProfileResponse {

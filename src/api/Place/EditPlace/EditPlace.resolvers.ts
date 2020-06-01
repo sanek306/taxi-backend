@@ -10,12 +10,12 @@ const resolvers: Resolvers = {
     Mutation: {
         EditPlace: authResolver (async(_, args: EditPlaceMutationArgs, { req }): Promise<EditPlaceResponse> => {
             const user : User = req.user;
-            const { placeId } = args;
+            const { placeId: id, ...otherArgs } = args;
             try {
-                const place = await Place.findOne({ id: placeId });
+                const place = await Place.findOne({ id });
                 if (place) {
                     if (place.userId === user.id) {
-                        await Place.update( { id: args.placeId },{ ...args });
+                        await Place.update( { id },{ id, ...otherArgs });
                         return {
                             ok: true,
                             error: null
