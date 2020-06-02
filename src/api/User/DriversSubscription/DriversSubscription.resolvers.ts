@@ -16,10 +16,10 @@ const resolvers = {
                     }} = payload;
                     const { lastLat: userLastLat, lastLng: userLastLng } = user;
                     return (
-                        driverLastLat >= userLastLat - 0.05 &&
-                        driverLastLat <= userLastLat + 0.05 &&
-                        driverLastLng >= userLastLng - 0.05 &&
-                        driverLastLng <= userLastLng + 0.05
+                        driverLastLat >= userLastLat - 1 &&
+                        driverLastLat <= userLastLat + 1 &&
+                        driverLastLng >= userLastLng - 1 &&
+                        driverLastLng <= userLastLng + 1
                     );
                 })
         }

@@ -7,17 +7,16 @@ import Ride from "../../../entities/Ride";
 
 const resolvers: Resolvers = {
     Query: {
-        GetNearbyRide: authResolver(async (_, __, { req, pubSub }) : Promise<GetNearbyRideResponse> => {
+        GetNearbyRide: authResolver(async (_, __, { req }) : Promise<GetNearbyRideResponse> => {
             const user: User = req.user;
             const { lastLat, lastLng } = user;
             if (user.isDriving) {
                 try {
                     const ride = await Ride.findOne({
                         status: "REQUESTING",
-                        pickUpLat: Between(lastLat - 0.05, lastLat + 0.05),
-                        pickUpLnd: Between(lastLng - 0.05, lastLng + 0.05)
-                    }, { relations: ["passenger"]});
-                    pubSub.publish("rideRequest", { NearbyRideSubscription: ride });
+                        pickUpLat: Between(lastLat - 1, lastLat + 1),
+                        pickUpLnd: Between(lastLng - 1, lastLng + 1)
+                    }, { relations: ["passenger", "driver"]});
                     if (ride) {
                         return {
                             ok: true,

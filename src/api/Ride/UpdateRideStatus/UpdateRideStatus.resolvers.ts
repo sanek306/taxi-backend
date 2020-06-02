@@ -14,7 +14,7 @@ const resolvers: Resolvers = {
                 try {
                     let ride;
                     if (status === "ACCEPTED") {
-                        ride = await Ride.findOne({id: rideId, status: "REQUESTING"}, { relations: ["passenger"] });
+                        ride = await Ride.findOne({id: rideId, status: "REQUESTING"}, { relations: ["passenger", "driver"] });
                         if (ride) {
                             ride.driver = user;
                             user.isTaken = true;
@@ -25,8 +25,15 @@ const resolvers: Resolvers = {
                             }).save();
                             await ride.save();
                         }
+                    } else if (status === "FINISHED") {
+                        ride = await Ride.findOne({id: rideId, driver: user}, { relations: ["passenger", "driver"] });
+                        const passenger: User = ride.passenger;
+                        passenger.isRiding = false;
+                        await passenger.save();
+                        user.isTaken = false;
+                        await user.save();
                     } else {
-                        ride = await Ride.findOne({id: rideId, driver: user});
+                        ride = await Ride.findOne({id: rideId, driver: user}, { relations: ["passenger", "driver"] });
                     }
                     if (ride) {
                         ride.status = status;

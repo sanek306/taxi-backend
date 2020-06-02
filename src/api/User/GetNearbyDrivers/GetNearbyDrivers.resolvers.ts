@@ -13,8 +13,8 @@ const resolvers: Resolvers = {
             try {
                 const drivers = await User.find({
                     isDriving: true,
-                    lastLat: Between(lastLat - 0.05, lastLat + 0.05),
-                    lastLng: Between(lastLng - 0.05, lastLng + 0.05)
+                    lastLat: Between(lastLat - 1, lastLat + 1),
+                    lastLng: Between(lastLng - 1, lastLng + 1)
                 });
                 return {
                     ok: true,

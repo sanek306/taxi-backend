@@ -12,14 +12,14 @@ const resolvers = {
                     const user: User = context.currentUser;
                     const { NearbyRideSubscription: {
                         pickUpLat,
-                        pickUpLng
+                        pickUpLnd
                     }} = payload;
                     const { lastLat: userLastLat, lastLng: userLastLng } = user;
                     return (
-                        pickUpLat >= userLastLat - 0.05 &&
-                        pickUpLat <= userLastLat + 0.05 &&
-                        pickUpLng >= userLastLng - 0.05 &&
-                        pickUpLng <= userLastLng + 0.05
+                        pickUpLat >= userLastLat - 1 &&
+                        pickUpLat <= userLastLat + 1 &&
+                        pickUpLnd >= userLastLng - 1 &&
+                        pickUpLnd <= userLastLng + 1
                     );
                 })
         }
