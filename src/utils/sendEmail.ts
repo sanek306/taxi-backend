@@ -8,9 +8,9 @@ const  mailGunClient = new Mailgun({
     domain: process.env.MAILGUN_DOMAIN
 });
 
-const sendEmail = (subject: string, html: string, to: string = "sanek306@gmail.com") => {
+const sendEmail = (subject: string, html: string, to: string = "16itzt2.puhachou.a@pdu.by") => {
     const emailData = {
-        from: "sanek306@gmail.com",
+        from: "16itzt2.puhachou.a@pdu.by",
         to,
         subject,
         html

@@ -1,7 +1,6 @@
 type User {
     id: Int!
     email: String
-    verifiedEmail: Boolean!
     firstName: String!
     lastName: String!
     facebookID: String

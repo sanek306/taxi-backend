@@ -39,13 +39,10 @@ type Mutation {
   EditPlace(placeId: Int!, name: String!, isFav: Boolean!): EditPlaceResponse!
   RequestRide(pickUpAddress: String!, pickUpLat: Float!, pickUpLnd: Float!, dropOffAddress: String!, dropOffLat: Float!, dropOffLnd: Float!, price: Float!, distance: String!, duration: String!): RequestRideResponse!
   UpdateRideStatus(rideId: Int!, status: StatusOptions!): UpdateRideStatusResponse!
-  CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
   CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
-  EmailSignIn(email: String!, password: String!): EmailSignInResponse!
-  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!
+  CreateUser(firstName: String!, lastName: String!, email: String!, phoneNumber: String!): CreateUserResponse!
   FacebookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FacebookConnectResponse!
   ReportMovement(lastLng: Float, lastLat: Float, lastOrientation: Float): ReportMovementResponse!
-  RequestEmailVerification: RequestEmailVerificationResponse!
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
   ToggleDrivingMode: ToggleDrivingModeResponse!
   UpdateMyProfile(firstName: String, lastName: String, email: String, password: String, profilePhoto: String, age: Int): UpdateMyProfileResponse!
@@ -69,6 +66,7 @@ type Message {
   text: String!
   chat: Chat!
   user: User!
+  userId: Int!
   chatId: Int!
   createdAt: String!
   updatedAt: String
@@ -161,24 +159,13 @@ enum StatusOptions {
   ONROUTE
 }
 
-type CompleteEmailVerificationResponse {
-  ok: Boolean!
-  error: String
-}
-
 type CompletePhoneVerificationResponse {
   ok: Boolean!
   error: String
   token: String
 }
 
-type EmailSignInResponse {
-  ok: Boolean!
-  error: String
-  token: String
-}
-
-type EmailSignUpResponse {
+type CreateUserResponse {
   ok: Boolean!
   error: String
   token: String
@@ -207,15 +194,9 @@ type ReportMovementResponse {
   error: String
 }
 
-type RequestEmailVerificationResponse {
-  ok: Boolean!
-  error: String
-}
-
 type User {
   id: Int!
   email: String
-  verifiedEmail: Boolean!
   firstName: String!
   lastName: String!
   facebookID: String

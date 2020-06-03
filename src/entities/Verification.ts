@@ -9,13 +9,13 @@ import {
 } from "typeorm";
 import {verificationTarget} from "../types/types";
 
-const PHONE = "PHONE", EMAIL = "EMAIL";
+const PHONE = "PHONE";
 
 @Entity()
 class Verification extends BaseEntity {
     @PrimaryGeneratedColumn() id: number;
 
-    @Column({ type: "text", enum: [PHONE, EMAIL] })
+    @Column({ type: "text", enum: [PHONE] })
     target: verificationTarget;
     @Column({ type: "text" })
     payload: string;
