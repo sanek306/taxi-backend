@@ -5,13 +5,15 @@ import {
 import Verification from "../../../entities/Verification";
 import User from "../../../entities/User";
 import createJWT from "../../../utils/createJWT";
+import {verifySMS} from "../../../utils/sendSMS";
 
 const resolvers: Resolvers = {
     Mutation: {
         CompletePhoneVerification: async (_, args: CompletePhoneVerificationMutationArgs) : Promise<CompletePhoneVerificationResponse> => {
             const { phoneNumber, key } = args;
             try {
-                const existingVerification = await Verification.findOne({ payload: phoneNumber, key });
+                const code: any = await verifySMS(key, phoneNumber);
+                const existingVerification = await Verification.findOne({ payload: phoneNumber, key: code });
                 if (!existingVerification) {
                     return {
                         ok: false,
