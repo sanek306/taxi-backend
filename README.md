@@ -4,6 +4,7 @@ Created by materials of Nomad Academy.
 
 ## Start:
 - docker-compose up -d
+- yarn install
 - yarn dev-mac
 
 ## Resolvers
