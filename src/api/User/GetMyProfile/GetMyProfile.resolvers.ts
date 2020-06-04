@@ -1,4 +1,4 @@
-import { Resolvers } from "types/resolvers";
+import { Resolvers } from "src/types/resolvers";
 import authResolver from "../../../utils/authResolver";
 
 const resolvers: Resolvers = {

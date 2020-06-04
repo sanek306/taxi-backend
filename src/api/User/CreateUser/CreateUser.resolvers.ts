@@ -1,4 +1,4 @@
-import { Resolvers } from "types/resolvers";
+import { Resolvers } from "src/types/resolvers";
 import {CreateUserMutationArgs, CreateUserResponse} from "../../../types/graph";
 import User from "../../../entities/User";
 import createJWT from "../../../utils/createJWT";

@@ -1,4 +1,4 @@
-import {Resolvers} from "types/resolvers";
+import {Resolvers} from "src/types/resolvers";
 import {UpdateRideStatusMutationArgs, UpdateRideStatusResponse} from "../../../types/graph";
 import authResolver from "../../../utils/authResolver";
 import User from "../../../entities/User";

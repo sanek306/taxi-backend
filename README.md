@@ -2,6 +2,10 @@
 Backend for my diploma of PSU.
 Created by materials of Nomad Academy.
 
+## Start:
+- docker-compose up -d
+- yarn dev-mac
+
 ## Resolvers
 
 ### Public Resolvers: 
@@ -41,8 +45,3 @@ Created by materials of Nomad Academy.
 - [x] Get Chat Room Messages
 - [x] Subscribe to Chat Room Messages
 - [x] Send a Chat Message
-
-## Code Challenge
-
-- [ ] Get Ride History
-- [ ] See Ride Detail

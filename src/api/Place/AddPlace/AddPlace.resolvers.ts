@@ -1,4 +1,4 @@
-import { Resolvers } from "types/resolvers";
+import { Resolvers } from "src/types/resolvers";
 import {
     AddPlaceMutationArgs, AddPlaceResponse
 } from "../../../types/graph";

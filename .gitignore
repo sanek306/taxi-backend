@@ -77,3 +77,6 @@ node_modules/
 src/.env
 
 *.log
+
+dist
+.vercel

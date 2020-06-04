@@ -1,4 +1,4 @@
-import { Resolvers } from "types/resolvers";
+import { Resolvers } from "src/types/resolvers";
 import User from "../../../entities/User";
 import authResolver from "../../../utils/authResolver";
 import {GetMyPlacesResponse} from "../../../types/graph";
